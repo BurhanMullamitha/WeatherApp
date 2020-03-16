@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/ee1e919155.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <div class="tabs">
+            <a class="active tablinks" onclick="showBox(event, 'box-1')">Weather</a>
+            <a class="tablinks" onclick="showBox(event, 'box-2')">Weather Charts</a>
+            <a class="tablinks" onclick="showBox(event, 'box-3')">Compare City</a>
+        </div>
+    </nav>
+
+    <div id="box-1" class="tabcontent">
+        <header>
+            <div id="logo"> 
+                <span>WEATHER</span>
+            </div>
+            <div id="right-header">
+                <div id="searchDiv">
+                    <input type="text" id="location" value="" placeholder="Search Place">
+                       
+                    <button type="btn" class="btnGetWeather"><i class="fa fa-search" style="color: white;"></i></button>
+                </div>
+
+                <div id="gpsDiv">
+                    <i class="fa fa-map-marker" class="btnGetWeather" style="font-size: 28px;color:red"></i>
+                </div>
+
+            </div>
+            <div id="switchContainer" class="switcher switcher-1">
+                <input type="checkbox" id="switcher-1" checked>
+                <label for="switcher-1"></label>
+            </div>
+        </header>
+        <main>
+            <div id="city-wrapper">
+                <div id="city-details">
+                    <span><h1 id="city-name" class="city-text primary"></h1></span>
+                </div>
+            </div>
+            <div id="weather-wrapper">
+                <div id="weather-cards">
+                    <div id="day1" class="card">
+                        <div id="current-date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="current-date-details">
+                                <div class="today">Today</div>
+                                <div class="today-date">16 March</div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-main">35 C</div>
+                        <div class="address">Athlone, Ireland</div>
+                        <div id="sunrise-sunset">
+                            <span class="sunrise">6:40 am</span>
+                            |
+                            <span class="sunset">5:30 pm</span>
+                        </div>
+                        <div class="time_pred"></div>
+                    </div>
+
+                    <div id="day2" class="card">
+                        <div id="tomorrow-date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="tomorrow-date-details">
+                                <div class="day-name">Tomorrow</div>
+                                <div class="date"></div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-forecast-main"></div>
+                        <div class="address"></div>
+                        <div class="time_pred"></div>
+                    </div>
+
+                    <div id="day3" class="card">
+                        <div id="date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="date-details">
+                                <div class="day-name"></div>
+                                <div class="date"></div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-forecast-main"></div>
+                        <div class="address"></div>
+                        <div class="time_pred"></div>
+                    </div>
+
+                    <div id="day4" class="card">
+                        <div id="date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="date-details">
+                                <div class="day-name"></div>
+                                <div class="date"></div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-forecast-main"></div>
+                        <div class="address"></div>
+                        <div class="time_pred"></div>
+                    </div>
+
+                    <div id="day5" class="card">
+                        <div id="date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="date-details">
+                                <div class="day-name"></div>
+                                <div class="date"></div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-forecast-main"></div>
+                        <div class="address"></div>
+                        <div class="time_pred"></div>
+                    </div>
+
+                    <div id="day6" class="card">
+                        <div id="date-wrapper">
+                            <div id="icon-div"><img id="weatherImg"></div>
+                            <div id="date-details">
+                                <div class="day-name"></div>
+                                <div class="date"></div>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                        <div class="temp-forecast-main"></div>
+                        <div class="address"></div>
+                        <div class="time_pred"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="box-2" class="tabcontent">
+        Weather Charts
+    </div>
+
+    <div id="box-3" class="tabcontent">
+        Compare City Weather
+    </div>
+
+    <script>
+        function showBox(evt, name) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            document.getElementById(name).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>
