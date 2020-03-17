@@ -47,8 +47,32 @@ var day6 = new Date(); day6.setDate(day5.getDate() + 1);
 var dateArray = [day1.getDate(), day2.getDate(), day3.getDate(), day4.getDate(), day5.getDate(), day6.getDate()];
 var dayArray = [day1.getDay(), day2.getDay(), day3.getDay(), day4.getDay(), day5.getDay(), day6.getDay()];
 
+function getWeatherByLocation() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else
+        alert("Geolocation is not supported by this browser!");
+}
+
+function showPosition(position) {
+    var url = "https://api.opencagedata.com/geocode/v1/json?key=71148203bcb445e0ad807378213a287a&q=" + 
+    position.coords.latitude + "," + position.coords.longitude + "&pretty=1&no_annotations=1";
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            var state = data.results["0"].components.state;
+            var country = data.results["0"].components.country;
+            var address = state + ", " + country;
+            document.getElementById("location").value = address;
+            getWeather(address);
+            getForecastWeather(address);
+            
+        })
+}
+
 function getWeather(location) {
-    console.log(location);
     var unit = document.getElementById('switcher-1').checked ? 'metric' : 'imperial';
     var unitSymbol = document.getElementById('switcher-1').checked ? '&#8451;' : '&#8457;';
     
@@ -58,7 +82,6 @@ function getWeather(location) {
     request.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
             var weatherData = this.responseXML;
-            console.log(weatherData);
 
             const city = weatherData.getElementsByTagName("current")[0].childNodes[0].getAttribute("name");
             currentWeatherArray["city"] = city;
@@ -84,7 +107,6 @@ function getWeather(location) {
             const weather_title = weatherData.getElementsByTagName("current")[0].childNodes[8].getAttribute("value");
             currentWeatherArray["weather_title"] = weather_title;
             const icon = weatherData.getElementsByTagName("current")[0].childNodes[9].getAttribute("icon");
-            console.log(icon);
             currentWeatherArray["icon"] = icon;
 
             var currentDate = new Date();
@@ -118,7 +140,6 @@ function getForecastWeather(location) {
     request.onreadystatechange = function() {
         if(this.status == 200 && this.readyState == 4) {
             var forecastData = this.responseXML;
-            // console.log(forecastData);
 
             var weatherForecast = forecastData.getElementsByTagName("weatherdata")[0].childNodes[4].childNodes;
             for(var i=0; i<weatherForecast.length; i++) {
@@ -258,8 +279,6 @@ function getForecastWeather(location) {
 
             }
             // End of For Loop
-
-            console.log(weatherForecastArray);
 
             var timeNodes = document.getElementsByClassName("timelyWeatherWrapper");
             for(var i=0; i<=39; i++) {
