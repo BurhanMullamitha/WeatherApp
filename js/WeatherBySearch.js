@@ -7,6 +7,7 @@ const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 var currentWeatherArray = {};
 var weatherForecastArray = {};
 var cityID = "";
+var orderArray = [1, 2, 3, 4, 5, 6];
 
 function formatAMPM(date) {
     var hours = date.getHours();
@@ -300,4 +301,34 @@ function getForecastWeather(location) {
     }  
     request.open("GET",  url, true);
     request.send();
+}
+
+function rotateLeft(array) {
+    var temp = array.shift();
+    array.push(temp);
+}
+
+function rotateRight(array) {
+  var temp = array.pop();
+  array.splice(0, 0, temp);
+}
+
+function prevCard() {
+    rotateRight(orderArray);
+    window.setTimeout(function () {
+        for(let i=1; i<=6; i++) {
+            var el = "day" + i;
+            document.getElementById(el).style.order = orderArray.indexOf(i) + 1;
+        }
+    }, 1000);
+}
+
+function nextCard() {
+    rotateLeft(orderArray);
+    window.setTimeout(function () {
+        for(let i=1; i<=6; i++) {
+            var el = "day" + i;
+            document.getElementById(el).style.order = orderArray.indexOf(i) + 1;
+        }
+    }, 1000);
 }
