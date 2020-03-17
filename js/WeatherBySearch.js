@@ -332,3 +332,8 @@ function nextCard() {
         }
     }, 1000);
 }
+
+window.onload = function() {
+    getWeather(document.getElementById('location').value);
+    getForecastWeather(document.getElementById('location').value);
+}
