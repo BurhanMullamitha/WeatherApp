@@ -474,3 +474,22 @@ main {
     height: 25px;
     width: 25px;
 }
+
+#chart-1 {
+    height: 100%;
+    width: 50%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+#chart-2 {
+    height: 100%;
+    width: 50%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

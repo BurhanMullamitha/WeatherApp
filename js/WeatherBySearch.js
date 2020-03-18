@@ -73,6 +73,11 @@ function showPosition(position) {
         })
 }
 
+function onChangeUnit() {
+    getWeather(document.getElementById('location').value);
+    getForecastWeather(document.getElementById('location').value);
+}
+
 function getWeather(location) {
     var unit = document.getElementById('switcher-1').checked ? 'metric' : 'imperial';
     var unitSymbol = document.getElementById('switcher-1').checked ? '&#8451;' : '&#8457;';
@@ -127,6 +132,7 @@ function getWeather(location) {
     };
     request.open("GET", url, true);
     request.send();
+    makeChart1(); makeChart2();
 }
 
 
@@ -301,6 +307,7 @@ function getForecastWeather(location) {
     }  
     request.open("GET",  url, true);
     request.send();
+    makeChart1(); makeChart2();
 }
 
 function rotateLeft(array) {
@@ -333,7 +340,89 @@ function nextCard() {
     }, 1000);
 }
 
+function makeChart1() {
+
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart(){
+        var data = new google.visualization.DataTable();
+        data.addColumn('datetime','Time');
+        data.addColumn('number','Wind');
+        var barGraphValues = [];
+        for(let k =0;k<8;k++){
+            var year = new Date(weatherForecastArray[k]["from"]).getFullYear();
+            var month = new Date(weatherForecastArray[k]["from"]).getMonth();
+            var day = new Date(weatherForecastArray[k]["from"]).getDate();
+            var hour = new Date(weatherForecastArray[k]["from"]).getHours();
+            var minute = new Date(weatherForecastArray[k]["from"]).getMinutes();
+            var time = new Date(year,month,day,hour,minute);
+            var wind_speed = parseFloat(weatherForecastArray[k]["wind_speed"]);
+            barGraphValues.push([time, wind_speed]);
+        }
+        data.addRows(barGraphValues);
+        var options = {
+            title: "Wind : 24 Hours (m/s)",
+            backgroundColor: { fill:'transparent' },
+            'width': 620,
+            'height': 350,
+            hAxis:{format: 'HH:mm',title : 'Time',gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
+            vAxis: {title : 'Wind (m/s)',gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
+            bar: {groupWidth: "55%"},
+            titleTextStyle : {
+                color : 'white'
+            },
+            colors : ['white'],
+            legend: { position: "none" },
+        };
+        var barchart = new google.visualization.ColumnChart(document.getElementById("barchart"));
+        barchart.draw(data, options);
+    }
+}
+
+function makeChart2() {
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', {'packages':['line']});
+
+    google.charts.setOnLoadCallback(drawChart);
+          
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('datetime', 'Time');
+        data.addColumn('number', 'Temperature');
+        var lineChartValues = [];
+        for(let k =0;k<8;k++){
+            var year = new Date(weatherForecastArray[k]["from"]).getFullYear();
+            var monthval = new Date(weatherForecastArray[k]["from"]).getMonth();
+            var dayval = new Date(weatherForecastArray[k]["from"]).getDate();
+            var hourval = new Date(weatherForecastArray[k]["from"]).getHours();
+            var time = new Date(year,monthval,dayval,hourval);
+            var temp = weatherForecastArray[k]["temp"];
+            
+            lineChartValues.push([time, temp]);
+        }
+  
+        data.addRows(lineChartValues);
+
+        var options = {
+            vAxis: {title: 'Temperature', gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
+            hAxis: {title: 'Time', format: 'HH:mm', titleTextStyle : {color : 'white'},textStyle : {color : 'white'},gridlines : {color : 'none'}},
+            titleTextStyle : {color : 'white'},
+            title : 'Temperature vs Time',
+            'width': 620,
+            'height': 350,
+            backgroundColor: { fill:'transparent' },
+            legend : 'none',
+            colors : ['white']
+        };
+
+        var linechart = new google.visualization.AreaChart(document.getElementById('linechart'));
+        linechart.draw(data, options);
+    }
+}
+
 window.onload = function() {
     getWeather(document.getElementById('location').value);
     getForecastWeather(document.getElementById('location').value);
+    makeChart1();
+    makeChart2();
 }
