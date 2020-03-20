@@ -475,6 +475,8 @@ main {
     width: 25px;
 }
 
+/* Charts CSS */
+
 #chart-1 {
     height: 100%;
     width: 50%;
@@ -492,4 +494,97 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+/* Compare City Weather CSS */
+
+#compareCity1 {
+    float: left;
+    height: 100%;
+    width: 40%;
+    position: relative;
+}
+
+#compareOptions {
+    float: left;
+    height: 100%;
+    width: 20%;
+    background: #1F1A36;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    position: relative;
+}
+
+#cOptions {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-45%);
+}
+
+#compareCity2 {
+    float: right;
+    height: 100%;
+    width: 40%;
+    position: relative;
+}
+
+#searchCity1, #searchCity2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 25px;
+}
+
+.compareCard{ 
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#firstCityDay2, #firstCityDay3, #firstCityDay4, #firstCityDay5, #firstCityDay6 {
+    display: none;
+}
+
+#selectedDay {
+    height: 40px;
+    width: 200px;
+    background: transparent;
+    margin: 25px;
+    color: white;
+    border: 2px solid white;
+}
+
+#compareOptions #switchContainer {
+    margin: auto;
+}
+
+#compareOptions div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#btnReset {
+    height: 45px;
+    width: 120px;
+    border: 3px solid black;
+    color: black;
+    background: orange;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 600ms;
+    outline: none;
+}
+
+#btnReset:hover {
+    color: orange;
+    background: white;
+    transition: all 600ms;
+}
+
+#secondCityDay2, #secondCityDay3, #secondCityDay4, #secondCityDay5, #secondCityDay6 {
+    display: none;
 }

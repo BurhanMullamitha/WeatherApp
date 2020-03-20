@@ -159,7 +159,219 @@
     </div>
 
     <div id="box-3" class="tabcontent">
-        Compare City Weather
+        <div id="compareCity1">
+            <div id="searchCity1">
+                <div id="searchDiv">
+                    <input type="text" id="cityLeftLocation" value="" placeholder="Search Place">
+                    
+                    <button type="btn" class="btnGetWeather"><i class="fa fa-search" style="color: white;"></i></button>
+                </div>
+                <div id="gpsDiv">
+                    <i class="fa fa-map-marker" class="btnGetWeather" style="font-size: 28px;color:red"></i>
+                </div>
+            </div>
+            <div id="firstCityDay1" class="card compareCard">
+                <div id="current-date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="current-date-details">
+                        <div class="today">Today</div>
+                        <div class="today-date">xx Month</div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-main">X<sup style='font-size: 20px;'>&#8451;</sup></div>
+                <div class="address">City, Country</div>
+                <div id="sunrise-sunset">
+                    <span class="sunrise">Sunrise hh:mm</span>
+                    |
+                    <span class="sunset">Sunset hh:mm</span>
+                </div>
+                <div class="time_pred"></div>
+            </div>
+    
+            <div id="firstCityDay2" class="card compareCard">
+                <div id="tomorrow-date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="tomorrow-date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="firstCityDay3" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="firstCityDay4" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="firstCityDay5" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="firstCityDay6" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+        </div>
+        <div id="compareOptions">
+            <div id="cOptions">
+
+                <select id="selectedDay">
+                    <option value="Today">Today</option>
+                    <option value="Tomorrow">Tomorrow</option>
+                    <!-- 4 next days calculated and added -->
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select>
+
+                <div id="switchContainer" class="switcher switcher-1">
+                    <input type="checkbox" id="switcher-2" checked>
+                    <label for="switcher-1"></label>
+                </div>
+                <div><button type="button" id="btnReset">Reset</button></div>
+            </div>
+        </div>
+        <div id="compareCity2">
+            <div id="searchCity2">
+                <div id="searchDiv">
+                    <input type="text" id="cityRightLocation" value="" placeholder="Search Place">
+                    
+                    <button type="btn" class="btnGetWeather"><i class="fa fa-search" style="color: white;"></i></button>
+                </div>
+                <div id="gpsDiv">
+                    <i class="fa fa-map-marker" class="btnGetWeather" style="font-size: 28px;color:red"></i>
+                </div>
+            </div>
+            <div id="secondCityDay1" class="card  compareCard">
+                <div id="current-date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="current-date-details">
+                        <div class="today">Today</div>
+                        <div class="today-date">xx Month</div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-main">X<sup style='font-size: 20px;'>&#8451;</sup></div>
+                <div class="address">City, Country</div>
+                <div id="sunrise-sunset">
+                    <span class="sunrise">Sunrise hh:mm</span>
+                    |
+                    <span class="sunset">Sunset hh:mm</span>
+                </div>
+                <div class="time_pred"></div>
+            </div>
+
+            <div id="secondCityDay2" class="card compareCard">
+                <div id="tomorrow-date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="tomorrow-date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="secondCityDay3" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="secondCityDay4" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="secondCityDay5" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+            <div id="secondCityDay6" class="card compareCard">
+                <div id="date-wrapper">
+                    <div id="icon-div"><img id="weatherImg"></div>
+                    <div id="date-details">
+                        <div class="day-name"></div>
+                        <div class="date"></div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+                <div class="temp-forecast-main"></div>
+                <div class="address"></div>
+                <div class="time_pred"></div>
+            </div>
+
+        </div>
     </div>
 
 
