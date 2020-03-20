@@ -48,6 +48,12 @@ var day6 = new Date(); day6.setDate(day5.getDate() + 1);
 var dateArray = [day1.getDate(), day2.getDate(), day3.getDate(), day4.getDate(), day5.getDate(), day6.getDate()];
 var dayArray = [day1.getDay(), day2.getDay(), day3.getDay(), day4.getDay(), day5.getDay(), day6.getDay()];
 
+function playSound() {
+    var snd = new Audio("../sounds/flip-sound.wav");
+    snd.play();
+    snd.currentTime=0;
+}
+
 function getWeatherByLocation() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -321,6 +327,7 @@ function rotateRight(array) {
 }
 
 function prevCard() {
+    playSound();
     rotateRight(orderArray);
     window.setTimeout(function () {
         for(let i=1; i<=6; i++) {
@@ -331,6 +338,7 @@ function prevCard() {
 }
 
 function nextCard() {
+    playSound();
     rotateLeft(orderArray);
     window.setTimeout(function () {
         for(let i=1; i<=6; i++) {
