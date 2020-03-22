@@ -31,7 +31,7 @@
                 </div>
 
                 <div id="gpsDiv">
-                    <i class="fa fa-map-marker" class="btnGetWeather" onclick="getWeatherByLocation();" style="font-size: 28px;color:red"></i>
+                    <i class="fa fa-map-marker" class="btnGetWeather" onclick="getWeatherInfoByLocation();" style="font-size: 28px;color:red"></i>
                 </div>
 
             </div>
@@ -164,10 +164,10 @@
                 <div id="searchDiv">
                     <input type="text" id="cityLeftLocation" value="" placeholder="Search Place">
                     
-                    <button type="btn" class="btnGetWeather"><i class="fa fa-search" style="color: white;"></i></button>
+                    <button type="btn" class="btnGetWeather" onclick="getFirstCityWeather(document.getElementById('cityLeftLocation').value)"><i class="fa fa-search" style="color: white;"></i></button>
                 </div>
                 <div id="gpsDiv">
-                    <i class="fa fa-map-marker" class="btnGetWeather" style="font-size: 28px;color:red"></i>
+                    <i class="fa fa-map-marker" class="btnGetWeather" onclick="getCityWeatherByLocation('city1')" style="font-size: 28px;color:red"></i>
                 </div>
             </div>
             <div id="firstCityDay1" class="card compareCard">
@@ -258,7 +258,7 @@
         <div id="compareOptions">
             <div id="cOptions">
 
-                <select id="selectedDay">
+                <select id="selectedDay" onChange="showSelectedDay()">
                     <option value="Today">Today</option>
                     <option value="Tomorrow">Tomorrow</option>
                     <!-- 4 next days calculated and added -->
@@ -269,10 +269,10 @@
                 </select>
 
                 <div id="switchContainer" class="switcher switcher-1">
-                    <input type="checkbox" id="switcher-2" checked>
+                    <input type="checkbox" id="switcher-2" onchange="onCityChangeUnit()" checked>
                     <label for="switcher-1"></label>
                 </div>
-                <div><button type="button" id="btnReset">Reset</button></div>
+                <div><button type="button" id="btnReset" onclick="resetValues()">Reset</button></div>
             </div>
         </div>
         <div id="compareCity2">
@@ -280,10 +280,10 @@
                 <div id="searchDiv">
                     <input type="text" id="cityRightLocation" value="" placeholder="Search Place">
                     
-                    <button type="btn" class="btnGetWeather"><i class="fa fa-search" style="color: white;"></i></button>
+                    <button type="btn" class="btnGetWeather" onclick="getSecondCityWeather(document.getElementById('cityRightLocation').value)"><i class="fa fa-search" style="color: white;"></i></button>
                 </div>
                 <div id="gpsDiv">
-                    <i class="fa fa-map-marker" class="btnGetWeather" style="font-size: 28px;color:red"></i>
+                    <i class="fa fa-map-marker" class="btnGetWeather" onclick="getCityWeatherByLocation('city2')" style="font-size: 28px;color:red"></i>
                 </div>
             </div>
             <div id="secondCityDay1" class="card  compareCard">
@@ -374,11 +374,14 @@
         </div>
     </div>
 
-
+    <script src="js/common.js"></script>
+    <script src="js/WeatherCharts.js"></script>
     <script src="js/WeatherBySearch.js"></script>
+    <script src="js/CompareWeather.js"></script>
+
     <script>
         function showBox(evt, name) {
-            var i, tabcontent, tablinks;
+            let i, tabcontent, tablinks;
 
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {

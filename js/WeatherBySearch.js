@@ -1,77 +1,27 @@
-const api_key = "143de8ba913c997cadf64d3d59f13c63";
-
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-var currentWeatherArray = {};
-var weatherForecastArray = {};
-var cityID = "";
-var orderArray = [1, 2, 3, 4, 5, 6];
-
-function formatAMPM(date) {
-    var hours = date.getHours();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; 
-    var strTime = hours + ' ' + ampm;
-    return strTime;
-}
-
-var getTempIcon = {
-    "01d": "images/clearSky.png",
-    "01n": "images/clearSky.png",
-    "02d": "images/fewClouds.png",
-    "02n": "images/fewClouds.png",
-    "03d": "images/scatteredClouds.png",
-    "03n": "images/scatteredClouds.png",
-    "04d": "images/brokenClouds.png",
-    "04n": "images/brokenClouds.png",
-    "09d": "images/showerRain.png",
-    "09n": "images/showerRain.png",
-    "10d": "images/rain.png",
-    "10n": "images/rain.png",
-    "11d": "images/thunderstorm.png",
-    "11n": "images/thunderstorm.png",
-    "13d": "images/snow.png",
-    "13n": "images/snow.png",
-    "50d": "images/mist.png",
-    "50n": "images/mist.png",
-}
-
-var day1 = new Date();
-var day2 = new Date(); day2.setDate(day1.getDate() + 1);
-var day3 = new Date(); day3.setDate(day2.getDate() + 1);
-var day4 = new Date(); day4.setDate(day3.getDate() + 1);
-var day5 = new Date(); day5.setDate(day4.getDate() + 1);
-var day6 = new Date(); day6.setDate(day5.getDate() + 1);
-var dateArray = [day1.getDate(), day2.getDate(), day3.getDate(), day4.getDate(), day5.getDate(), day6.getDate()];
-var dayArray = [day1.getDay(), day2.getDay(), day3.getDay(), day4.getDay(), day5.getDay(), day6.getDay()];
-
 function playSound() {
-    var snd = new Audio("../sounds/flip-sound.wav");
+    const snd = new Audio("../sounds/flip-sound.wav");
     snd.play();
     snd.currentTime=0;
 }
 
-function getWeatherByLocation() {
+function getWeatherInfoByLocation() {
     if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPositionInfo);
     }
     else
         alert("Geolocation is not supported by this browser!");
 }
 
-function showPosition(position) {
-    var url = "https://api.opencagedata.com/geocode/v1/json?key=71148203bcb445e0ad807378213a287a&q=" + 
+function showPositionInfo(position) {
+    const url = "https://api.opencagedata.com/geocode/v1/json?key=71148203bcb445e0ad807378213a287a&q=" + 
     position.coords.latitude + "," + position.coords.longitude + "&pretty=1&no_annotations=1";
 
     fetch(url)
         .then((resp) => resp.json())
         .then(function(data) {
-            var state = data.results["0"].components.state;
-            var country = data.results["0"].components.country;
-            var address = state + ", " + country;
+            const state = data.results["0"].components.state;
+            const country = data.results["0"].components.country;
+            const address = state + ", " + country;
             document.getElementById("location").value = address;
             getWeather(address);
             getForecastWeather(address);
@@ -94,7 +44,6 @@ function getWeather(location) {
     request.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
             var weatherData = this.responseXML;
-
             const city = weatherData.getElementsByTagName("current")[0].childNodes[0].getAttribute("name");
             currentWeatherArray["city"] = city;
             document.querySelector("#city-name").innerHTML = city;
@@ -346,86 +295,6 @@ function nextCard() {
             document.getElementById(el).style.order = orderArray.indexOf(i) + 1;
         }
     }, 1000);
-}
-
-function makeChart1() {
-
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart(){
-        var data = new google.visualization.DataTable();
-        data.addColumn('datetime','Time');
-        data.addColumn('number','Wind');
-        var barGraphValues = [];
-        for(let k =0;k<8;k++){
-            var year = new Date(weatherForecastArray[k]["from"]).getFullYear();
-            var month = new Date(weatherForecastArray[k]["from"]).getMonth();
-            var day = new Date(weatherForecastArray[k]["from"]).getDate();
-            var hour = new Date(weatherForecastArray[k]["from"]).getHours();
-            var minute = new Date(weatherForecastArray[k]["from"]).getMinutes();
-            var time = new Date(year,month,day,hour,minute);
-            var wind_speed = parseFloat(weatherForecastArray[k]["wind_speed"]);
-            barGraphValues.push([time, wind_speed]);
-        }
-        data.addRows(barGraphValues);
-        var options = {
-            title: "Wind : 24 Hours (m/s)",
-            backgroundColor: { fill:'transparent' },
-            'width': 620,
-            'height': 350,
-            hAxis:{format: 'HH:mm',title : 'Time',gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
-            vAxis: {title : 'Wind (m/s)',gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
-            bar: {groupWidth: "55%"},
-            titleTextStyle : {
-                color : 'white'
-            },
-            colors : ['white'],
-            legend: { position: "none" },
-        };
-        var barchart = new google.visualization.ColumnChart(document.getElementById("barchart"));
-        barchart.draw(data, options);
-    }
-}
-
-function makeChart2() {
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-    google.charts.load('current', {'packages':['line']});
-
-    google.charts.setOnLoadCallback(drawChart);
-          
-    function drawChart() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('datetime', 'Time');
-        data.addColumn('number', 'Temperature');
-        var lineChartValues = [];
-        for(let k =0;k<8;k++){
-            var year = new Date(weatherForecastArray[k]["from"]).getFullYear();
-            var monthval = new Date(weatherForecastArray[k]["from"]).getMonth();
-            var dayval = new Date(weatherForecastArray[k]["from"]).getDate();
-            var hourval = new Date(weatherForecastArray[k]["from"]).getHours();
-            var time = new Date(year,monthval,dayval,hourval);
-            var temp = weatherForecastArray[k]["temp"];
-            
-            lineChartValues.push([time, temp]);
-        }
-  
-        data.addRows(lineChartValues);
-
-        var options = {
-            vAxis: {title: 'Temperature', gridlines : {color : 'none'},titleTextStyle : {color : 'white'},textStyle : {color : 'white'}},
-            hAxis: {title: 'Time', format: 'HH:mm', titleTextStyle : {color : 'white'},textStyle : {color : 'white'},gridlines : {color : 'none'}},
-            titleTextStyle : {color : 'white'},
-            title : 'Temperature vs Time',
-            'width': 620,
-            'height': 350,
-            backgroundColor: { fill:'transparent' },
-            legend : 'none',
-            colors : ['white']
-        };
-
-        var linechart = new google.visualization.AreaChart(document.getElementById('linechart'));
-        linechart.draw(data, options);
-    }
 }
 
 window.onload = function() {
